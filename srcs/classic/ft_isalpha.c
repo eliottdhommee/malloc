@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc.h                                     :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2019/03/04 14:45:51 by edhommee         ###   ########.fr       */
+/*   Created: 2016/11/07 09:16:02 by edhommee          #+#    #+#             */
+/*   Updated: 2017/05/20 17:15:20 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_H
-# define LIBFT_MALLOC_H
+#include <libft.h>
 
-# include <stdlib.h>
-# include <sys/mman.h>
-# define TINY_MALLOC 100
-# define SMALL_MALLOC 1000
-# define LARGE_MALLOC 10000
-
-void		*malloc(size_t size);
-void		free(void *ptr);
-void		*realloc(void *ptr, size_t size);
-
-#endif
+int		ft_isalpha(int c)
+{
+	if ((c >= 0101 && c <= 0132) || (c >= 0141 && c <= 0172))
+		return (1);
+	else if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	return (0);
+}

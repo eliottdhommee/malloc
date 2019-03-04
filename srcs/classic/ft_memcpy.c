@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc.h                                     :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2019/03/04 14:45:51 by edhommee         ###   ########.fr       */
+/*   Created: 2016/11/07 09:21:00 by edhommee          #+#    #+#             */
+/*   Updated: 2017/09/09 17:39:20 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_H
-# define LIBFT_MALLOC_H
+#include <libft.h>
 
-# include <stdlib.h>
-# include <sys/mman.h>
-# define TINY_MALLOC 100
-# define SMALL_MALLOC 1000
-# define LARGE_MALLOC 10000
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t		i;
 
-void		*malloc(size_t size);
-void		free(void *ptr);
-void		*realloc(void *ptr, size_t size);
-
-#endif
+	i = -1;
+	while (++i < n)
+		*((char *)dst + i) = *((char *)src + i);
+	return (dst);
+}

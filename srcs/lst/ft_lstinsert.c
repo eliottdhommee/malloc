@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc.h                                     :+:      :+:    :+:   */
+/*   ft_lstinsert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2019/03/04 14:45:51 by edhommee         ###   ########.fr       */
+/*   Created: 2017/10/12 15:44:02 by edhommee          #+#    #+#             */
+/*   Updated: 2018/03/09 21:23:48 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_H
-# define LIBFT_MALLOC_H
+#include <liblst.h>
 
-# include <stdlib.h>
-# include <sys/mman.h>
-# define TINY_MALLOC 100
-# define SMALL_MALLOC 1000
-# define LARGE_MALLOC 10000
+void		ft_lstinsert(t_list **lst, void *data, int (*cmp)(void*, void*))
+{
+	t_list		*prev;
+	t_list		*tmp;
+	t_list		*new;
 
-void		*malloc(size_t size);
-void		free(void *ptr);
-void		*realloc(void *ptr, size_t size);
-
-#endif
+	tmp = *lst;
+	prev = NULL;
+	while (tmp && cmp(data, tmp->data) >= 0)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (!prev)
+	{
+		new = ft_lstnew(data);
+		new->next = *lst;
+		*lst = new;
+	}
+	else
+	{
+		new = ft_lstnew(data);
+		new->next = tmp;
+		prev->next = new;
+	}
+}

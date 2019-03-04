@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc.h                                     :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2019/03/04 14:45:51 by edhommee         ###   ########.fr       */
+/*   Created: 2016/11/07 09:25:37 by edhommee          #+#    #+#             */
+/*   Updated: 2017/05/20 17:22:56 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_H
-# define LIBFT_MALLOC_H
+#include <libft.h>
 
-# include <stdlib.h>
-# include <sys/mman.h>
-# define TINY_MALLOC 100
-# define SMALL_MALLOC 1000
-# define LARGE_MALLOC 10000
-
-void		*malloc(size_t size);
-void		free(void *ptr);
-void		*realloc(void *ptr, size_t size);
-
-#endif
+void	ft_putnbr(int nb)
+{
+	if (nb == -2147483648)
+	{
+		ft_putchar('-');
+		ft_putchar('2');
+		nb = 147483648;
+	}
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb = -nb;
+	}
+	if (nb <= 9)
+	{
+		ft_putchar(nb + '0');
+	}
+	else
+	{
+		ft_putnbr(nb / 10);
+		ft_putchar('0' + (nb % 10));
+	}
+}

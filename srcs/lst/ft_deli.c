@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc.h                                     :+:      :+:    :+:   */
+/*   ft_deli.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2019/03/04 14:45:51 by edhommee         ###   ########.fr       */
+/*   Created: 2017/10/15 18:26:33 by edhommee          #+#    #+#             */
+/*   Updated: 2017/10/15 19:28:46 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_H
-# define LIBFT_MALLOC_H
+#include <liblst.h>
 
-# include <stdlib.h>
-# include <sys/mman.h>
-# define TINY_MALLOC 100
-# define SMALL_MALLOC 1000
-# define LARGE_MALLOC 10000
+void		ft_deli(t_list **list, unsigned int i, void (*del)(void*))
+{
+	t_list		*prev;
+	t_list		*tmp;
 
-void		*malloc(size_t size);
-void		free(void *ptr);
-void		*realloc(void *ptr, size_t size);
-
-#endif
+	tmp = *list;
+	prev = tmp;
+	while (tmp && --i)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (tmp)
+	{
+		if (tmp == *list)
+			*list = tmp->next;
+		else
+			prev->next = tmp->next;
+		ft_lstdelone(&tmp, del);
+	}
+}

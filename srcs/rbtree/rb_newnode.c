@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc.h                                     :+:      :+:    :+:   */
+/*   rb_newnode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2019/03/04 14:45:51 by edhommee         ###   ########.fr       */
+/*   Created: 2018/03/15 16:29:12 by edhommee          #+#    #+#             */
+/*   Updated: 2018/03/15 19:28:02 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_H
-# define LIBFT_MALLOC_H
+#include <librb.h>
+#include <libft.h>
 
-# include <stdlib.h>
-# include <sys/mman.h>
-# define TINY_MALLOC 100
-# define SMALL_MALLOC 1000
-# define LARGE_MALLOC 10000
+t_rbtree		*rb_newnode(void *item)
+{
+	t_rbtree		*new_node;
 
-void		*malloc(size_t size);
-void		free(void *ptr);
-void		*realloc(void *ptr, size_t size);
-
-#endif
+	new_node = (t_rbtree*)ft_memalloc(sizeof(t_rbtree));
+	if (!new_node)
+		return (NULL);
+	else
+	{
+		new_node->data = item;
+		new_node->parent = NULL;
+		new_node->left = NULL;
+		new_node->right = NULL;
+		new_node->color = RB_RED;
+	}
+	return (new_node);
+}

@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc.h                                     :+:      :+:    :+:   */
+/*   ft_lstsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2019/03/04 14:45:51 by edhommee         ###   ########.fr       */
+/*   Created: 2018/03/14 17:24:54 by edhommee          #+#    #+#             */
+/*   Updated: 2018/03/14 17:40:17 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_H
-# define LIBFT_MALLOC_H
+#include <liblst.h>
 
-# include <stdlib.h>
-# include <sys/mman.h>
-# define TINY_MALLOC 100
-# define SMALL_MALLOC 1000
-# define LARGE_MALLOC 10000
+t_list		*ft_lstsub(t_list **list, int i)
+{
+	t_list		*tmp;
+	t_list		*ret;
 
-void		*malloc(size_t size);
-void		free(void *ptr);
-void		*realloc(void *ptr, size_t size);
-
-#endif
+	tmp = *list;
+	if (i == 0)
+	{
+		*list = tmp->next;
+		return (tmp);
+	}
+	while (tmp && --i)
+		tmp = tmp->next;
+	if (tmp && tmp->next)
+	{
+		ret = tmp->next;
+		tmp->next = ret->next;
+		ret->next = NULL;
+		return (ret);
+	}
+	return (NULL);
+}

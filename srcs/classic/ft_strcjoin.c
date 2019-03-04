@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_malloc.h                                     :+:      :+:    :+:   */
+/*   ft_strcjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2019/03/04 14:45:51 by edhommee         ###   ########.fr       */
+/*   Created: 2017/08/21 17:36:29 by edhommee          #+#    #+#             */
+/*   Updated: 2017/08/22 13:42:38 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_MALLOC_H
-# define LIBFT_MALLOC_H
+#include <libft.h>
 
-# include <stdlib.h>
-# include <sys/mman.h>
-# define TINY_MALLOC 100
-# define SMALL_MALLOC 1000
-# define LARGE_MALLOC 10000
+char	*ft_strcjoin(char const *s1, char const *s2, char c)
+{
+	char	*res;
+	int		size;
 
-void		*malloc(size_t size);
-void		free(void *ptr);
-void		*realloc(void *ptr, size_t size);
-
-#endif
+	if (!(s1 && s2))
+		return (NULL);
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (!(res = (char*)malloc((size + 1) * sizeof(char))))
+		return (NULL);
+	res = ft_strcpy(res, (char*)s1);
+	res[ft_strlen(s1)] = c;
+	res[ft_strlen(s1) + 1] = '\0';
+	res = ft_strcat(res, s2);
+	return (res);
+}
