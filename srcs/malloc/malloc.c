@@ -12,19 +12,6 @@
 
 #include <libft_malloc.h>
 
-void		*new_page(int size)
-{
-	size_t	page_len;
-
-	if (size == 1)
-		page_len = TINY_ZONE;
-	else if (size == 2)
-		page_len = SMALL_ZONE;
-	else
-		page_len = size;
-	(t_page*)mmap(NULL, page_len, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
-}
-
 int			get_size_type(size_t size)
 {
 	if (size <= TINY_MALLOC)
@@ -35,9 +22,29 @@ int			get_size_type(size_t size)
 		return(3);
 }
 
+int			align_size(int size)
+{
+	size = (size + 15) & ~15;
+	return (size);
+}
+
+t_rbtree		*search_free_space(t_rbtree *root, size_t size)
+{
+	if (!root)
+		return (NULL);
+	search_free_space(root->left, size);
+	if (((t_page*)root->data)->free == TRUE && ((t_page*)root->data)->size >= size)
+		return (root);
+	search_free_space(root->right, size);
+	return (NULL);
+}
+
 void		*malloc(size_t size)
 {
-	static void		**root_pages;;
+	static t_rbtree		**root_tiny;
+	static t_rbtree		**root_small;
+	static t_rbtree		**root_large;
+
 	if (size == 0)
 		return (NULL);
 }

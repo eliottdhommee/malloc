@@ -14,10 +14,26 @@
 # define LIBFT_MALLOC_H
 
 # include <stdlib.h>
+# include <unistd.h>
 # include <sys/mman.h>
-# define TINY_MALLOC 100
-# define SMALL_MALLOC 1000
-# define LARGE_MALLOC 10000
+# include <librb.h>
+
+# define TINY_MALLOC 512
+# define SMALL_MALLOC 2048
+
+enum				e_is_free
+{
+	TRUE,
+	FALSE
+};
+
+typedef	struct		s_page
+{
+	enum e_is_free	free;
+	size_t			size;
+	void			*data;
+
+}					t_page;
 
 void		*malloc(size_t size);
 void		free(void *ptr);
