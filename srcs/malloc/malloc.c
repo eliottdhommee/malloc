@@ -28,22 +28,22 @@ int			align_size(int size)
 	return (size);
 }
 
-t_rbtree		*search_free_space(t_rbtree *root, size_t size)
+t_page		*search_free_space(t_page *root, size_t size)
 {
 	if (!root)
 		return (NULL);
-	search_free_space(root->left, size);
-	if (((t_page*)root->data)->free == TRUE && ((t_page*)root->data)->size >= size)
+	search_free_space((t_page*)root->left, size);
+	if (((t_page*)root->item)->free == TRUE && ((t_page*)root->item)->size >= size)
 		return (root);
-	search_free_space(root->right, size);
+	search_free_space((t_page*)root->right, size);
 	return (NULL);
 }
 
 void		*malloc(size_t size)
 {
-	static t_rbtree		**root_tiny;
-	static t_rbtree		**root_small;
-	static t_rbtree		**root_large;
+	static t_page		**root_tiny;
+	static t_page		**root_small;
+	static t_page		**root_large;
 
 	if (size == 0)
 		return (NULL);

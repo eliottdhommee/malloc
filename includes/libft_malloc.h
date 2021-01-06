@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/mman.h>
-# include <librb.h>
+# include <libbtree.h>
 
 # define TINY_MALLOC 512
 # define SMALL_MALLOC 2048
@@ -29,9 +29,11 @@ enum				e_is_free
 
 typedef	struct		s_page
 {
+	struct s_btree	*left;
+	struct s_btree	*right;
+	void			*item;
 	enum e_is_free	free;
 	size_t			size;
-	void			*data;
 
 }					t_page;
 
