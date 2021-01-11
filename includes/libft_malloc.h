@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2019/10/22 14:57:45 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/01/11 10:29:57 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ enum				e_is_free
 
 typedef	struct		s_page
 {
-	struct s_btree	*left;
-	struct s_btree	*right;
-	void			*item;
+	struct s_page	*prev;
+	struct s_page	*next;
 	enum e_is_free	free;
 	size_t			size;
-
 }					t_page;
 
 void		*malloc(size_t size);
 void		free(void *ptr);
+size_t		get_page_size(size_t size);
+t_page		*new_node(void *ptr, size_t size);
 void		*realloc(void *ptr, size_t size);
 void		show_alloc_mem();
 
