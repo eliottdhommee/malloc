@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/01/11 10:39:10 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/01/11 11:43:13 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,8 @@ t_page		*search_free_space(t_page **root, size_t size)
 			(tmp->next)->next = tmp_next;
 			tmp->size = size;
 		}
+		return(tmp);
 	}
-	new->next = tmp;
-	prev->next = new;
 }
 
 void		*malloc(size_t size)
