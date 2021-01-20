@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 17:08:14 by edhommee          #+#    #+#             */
-/*   Updated: 2021/01/11 10:15:20 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/01/20 09:45:57 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ size_t			get_page_size(size_t size)
 	size_t page_size;
 
 	if (size <= TINY_MALLOC)
-		page_size = (((TINY_MALLOC + sizeof(t_page)) * 100) % getpagesize()) + 1;
+		page_size = (((TINY_MALLOC + sizeof(t_page)) * 100) / getpagesize()) * (getpagesize() + 1);
 	else if (size <= SMALL_MALLOC)
-		page_size = (((SMALL_MALLOC + sizeof(t_page)) * 100) % getpagesize()) + 1;
+		page_size = (((SMALL_MALLOC + sizeof(t_page)) * 100) / getpagesize()) * (getpagesize() + 1);
 	else
-		page_size = ((size + sizeof(t_page))  % getpagesize()) + 1;
+		page_size = ((size + sizeof(t_page))  / getpagesize()) * (getpagesize() + 1);
 	return (page_size);
 }
 
