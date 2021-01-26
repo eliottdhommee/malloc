@@ -15,8 +15,8 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+#include <stdio.h>
 # include <sys/mman.h>
-# include <libbtree.h>
 
 # define TINY_MALLOC 512
 # define SMALL_MALLOC 2048
@@ -35,10 +35,12 @@ typedef	struct		s_page
 	size_t			size;
 }					t_page;
 
-void		*malloc(size_t size);
+void		*ft_malloc(size_t size);
+void		*new_page(size_t size);
 void		free(void *ptr);
 size_t		get_page_size(size_t size);
 t_page		*new_node(void *ptr, size_t size);
+void		*stock_roots(size_t size);
 void		*realloc(void *ptr, size_t size);
 void		show_alloc_mem();
 

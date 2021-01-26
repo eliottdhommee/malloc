@@ -14,7 +14,7 @@ ifeq ($(HOSTTYPE),)
 		HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
-NAME		= libft_malloc_$(HOSTTYPE).so
+NAME		= libft_malloc_$(HOSTTYPE).a
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
@@ -22,7 +22,7 @@ CFLAGS		= -Wall -Wextra -Werror
 SRC_DIR		= ./srcs/
 
 MALLOC_DIR	= malloc/
-MALLOC_SRC	= malloc.c realloc.c free.c
+MALLOC_SRC	= malloc.c realloc.c free.c page_new.c
 
 BTREE_DIR	= btree/
 BTREE_SRC	= btree_apply_infix.c btree_apply_prefix.c btree_apply_suffix.c\

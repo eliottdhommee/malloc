@@ -24,7 +24,7 @@ int			get_size_type(size_t size)
 
 int			align_size(int size)
 {
-	size = (size + sizeof(t_page) + 15) & ~15 - sizeof(t_page);
+	size = (size  + 15) & ~15 ;
 	return (size);
 }
 
@@ -39,15 +39,13 @@ t_page		*search_free_space(t_page **root, size_t size)
 	t_page		*tmp_prev;
 	t_page		*tmp_next;
 
-	if (!*root)
-		*root = new_node(new_page(size), size);
 	tmp = *root;
 	while (tmp && tmp->free == FALSE && tmp->size <= size)
 	{
 		tmp_prev = tmp;
 		tmp = tmp->next;
 	}
-	if (tmp)
+	if (tmp && tmp->size >= size)
 	{
 		tmp->free = FALSE;
 		if (tmp->size - size > 2 * sizeof(t_page))
@@ -58,23 +56,28 @@ t_page		*search_free_space(t_page **root, size_t size)
 			(tmp->next)->next = tmp_next;
 			tmp->size = size;
 		}
-		return(tmp);
 	}
 	else
 	{
+	printf("variable f is at address: %p\n", (void*)tmp);
 		tmp_prev->next = new_node(new_page(size), size);
+		tmp = tmp_prev->next;
+		tmp->free = FALSE;
 	}
+	return(tmp);
 }
 
-void		*malloc(size_t size)
+void		*ft_malloc(size_t size)
 {
-	static t_page		**root_tiny;
-	static t_page		**root_small;
-	static t_page		**root_large;
+	t_page				**root;
 	t_page				*free_space;
 
 	if (size == 0)
 		return (NULL);
 	size = align_size(size);
-	free_space = search_free_space(root_tiny, size);
+	root = stock_roots(size);
+	free_space = search_free_space(root, size);
+	printf("variable B is at address: %p\n", (void*)free_space);
+	printf("variable c is at address: %lu\n", sizeof(t_page));
+	return ((char*)free_space + sizeof(t_page));
 }

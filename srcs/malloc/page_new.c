@@ -39,10 +39,36 @@ t_page		*new_node(void *ptr, size_t size)
 	return (new_page);
 }
 
-void	insert_data(t_page **root, size_t size)
+void			*stock_roots(size_t size)
 {
+	static t_page		*root_tiny = NULL;
+	static t_page		*root_small = NULL;
+	static t_page		*root_large = NULL;
+
+	if (size <= TINY_MALLOC)
+	{
+		if (!root_tiny)
+			root_tiny = new_node(new_page(size), get_page_size(size));
+		return (&root_tiny);
+	}
+	if (size <= SMALL_MALLOC)
+	{
+		if (!root_small)
+			root_small = new_node(new_page(size), get_page_size(size));
+		return (&root_small);
+	}
+	else
+	{
+		if (!root_large)
+			root_large = new_node(new_page(size), size);
+		return (&root_large);
+	}
 }
 
+/*void	insert_data(t_page **root, size_t size)
+{
+}
+*/
 /*
 
 	t_page	*tmp;
