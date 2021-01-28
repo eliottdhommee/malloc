@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/01/20 13:36:06 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/01/28 14:04:50 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_page		*search_free_space(t_page **root, size_t size)
 		tmp_prev = tmp;
 		tmp = tmp->next;
 	}
-	if (tmp && tmp->size >= size)
+	if (tmp && tmp->size >= size && tmp->free == TRUE)
 	{
 		tmp->free = FALSE;
 		if (tmp->size - size > 2 * sizeof(t_page))
@@ -57,11 +57,16 @@ t_page		*search_free_space(t_page **root, size_t size)
 			tmp->size = size;
 		}
 	}
-	else
+	else if (tmp)
 	{
-	printf("variable f is at address: %p\n", (void*)tmp);
-		tmp_prev->next = new_node(new_page(size), size);
-		tmp = tmp_prev->next;
+	printf("variable f is at address: %p\n", (void*)tmp_prev);
+		tmp->next = new_node(new_page(size), get_page_size(size));
+		tmp_next = tmp->next;
+		tmp->next = new_node(((char*)tmp + size), tmp->size - size);
+		(tmp->next)->prev = tmp;
+		(tmp->next)->next = tmp_next;
+		tmp->size = size;
+		tmp = tmp->next;
 		tmp->free = FALSE;
 	}
 	return(tmp);
@@ -77,7 +82,5 @@ void		*ft_malloc(size_t size)
 	size = align_size(size);
 	root = stock_roots(size);
 	free_space = search_free_space(root, size);
-	printf("variable B is at address: %p\n", (void*)free_space);
-	printf("variable c is at address: %lu\n", sizeof(t_page));
 	return ((char*)free_space + sizeof(t_page));
 }
