@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 17:08:14 by edhommee          #+#    #+#             */
-/*   Updated: 2021/01/20 09:45:57 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/11 09:01:52 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t			get_page_size(size_t size)
 	return (page_size);
 }
 
-t_page		*new_node(void *ptr, size_t size)
+t_page		*new_node(void *ptr, size_t size, enum e_bool isfirst)
 {
 	t_page		*new_page;
 
@@ -48,38 +48,19 @@ void			*stock_roots(size_t size)
 	if (size <= TINY_MALLOC)
 	{
 		if (!root_tiny)
-			root_tiny = new_node(new_page(size), get_page_size(size));
+			root_tiny = new_node(new_page(size), get_page_size(size), TRUE);
 		return (&root_tiny);
 	}
 	if (size <= SMALL_MALLOC)
 	{
 		if (!root_small)
-			root_small = new_node(new_page(size), get_page_size(size));
+			root_small = new_node(new_page(size), get_page_size(size), TRUE);
 		return (&root_small);
 	}
 	else
 	{
 		if (!root_large)
-			root_large = new_node(new_page(size), size);
+			root_large = new_node(new_page(size), size, TRUE);
 		return (&root_large);
 	}
 }
-
-/*void	insert_data(t_page **root, size_t size)
-{
-}
-*/
-/*
-
-	t_page	*tmp;
-
-	if (*root)
-	{
-		tmp = new_node();
-		tmp->next = *begin_list;
-		*begin_list = tmp;
-	}
-	else
-		*root= new_node(size);
-}
-*/
