@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/11 09:00:47 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/01/28 14:04:50 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_page		*search_free_space(t_page **root, size_t size)
 		if (tmp->size - size > 2 * sizeof(t_page))
 		{
 			tmp_next = tmp->next;
-			tmp->next = new_node(((char*)tmp + size), tmp->size - size, FALSE);
+			tmp->next = new_node(((char*)tmp + size), tmp->size - size);
 			(tmp->next)->prev = tmp;
 			(tmp->next)->next = tmp_next;
 			tmp->size = size;
@@ -60,9 +60,9 @@ t_page		*search_free_space(t_page **root, size_t size)
 	else if (tmp)
 	{
 	printf("variable f is at address: %p\n", (void*)tmp_prev);
-		tmp->next = new_node(new_page(size), get_page_size(size), TRUE);
+		tmp->next = new_node(new_page(size), get_page_size(size));
 		tmp_next = tmp->next;
-		tmp->next = new_node(((char*)tmp + size), tmp->size - size, FALSE);
+		tmp->next = new_node(((char*)tmp + size), tmp->size - size);
 		(tmp->next)->prev = tmp;
 		(tmp->next)->next = tmp_next;
 		tmp->size = size;

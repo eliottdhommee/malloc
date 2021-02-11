@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/11 09:00:06 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/01/11 10:29:57 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define TINY_MALLOC 512
 # define SMALL_MALLOC 2048
 
-enum				e_bool
+enum				e_is_free
 {
 	TRUE,
 	FALSE
@@ -31,8 +31,7 @@ typedef	struct		s_page
 {
 	struct s_page	*prev;
 	struct s_page	*next;
-	enum e_bool		free;
-	enum e_bool		first;
+	enum e_is_free	free;
 	size_t			size;
 }					t_page;
 
@@ -40,7 +39,7 @@ void		*ft_malloc(size_t size);
 void		*new_page(size_t size);
 void		free(void *ptr);
 size_t		get_page_size(size_t size);
-t_page		*new_node(void *ptr, size_t size, enum e_bool isfirst);
+t_page		*new_node(void *ptr, size_t size);
 void		*stock_roots(size_t size);
 void		*realloc(void *ptr, size_t size);
 void		show_alloc_mem();
