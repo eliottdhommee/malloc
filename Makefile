@@ -18,7 +18,6 @@ NAME		= libft_malloc_$(HOSTTYPE).a
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-
 SRC_DIR		= ./srcs/
 
 MALLOC_DIR	= malloc/
@@ -85,8 +84,9 @@ INCLUDES	= -I $(INC)
 all: $(NAME)
 
 $(NAME): obj $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
+	-shared $(NAME)
+	$(CC) $(CFLAGS) -shared $(OBJ) -o $(NAME)
+	@ln -sf $(NAME) libft_malloc.so
 
 obj:
 	mkdir -p $(OBJ_DIR)

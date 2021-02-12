@@ -7,11 +7,11 @@ int main()
 	char *addr;
 
 	i = 0;
-	while(i < 224)
+	while(i < 1024)
 	{
-		addr = (char*)ft_malloc(1024);
+		addr = (char*)malloc(1024);
+		printf("test\n");
 		addr[0] = 42;
-		printf("variable A is at address: %p\n", (void*)addr);
 		i++;
 	}
 	return(0);

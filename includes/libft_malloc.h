@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/11 09:00:06 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/12 11:56:14 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-#include <stdio.h>
+# include <stdio.h>
 # include <sys/mman.h>
 
 # define TINY_MALLOC 512
@@ -36,7 +36,7 @@ typedef	struct		s_page
 	size_t			size;
 }					t_page;
 
-void		*ft_malloc(size_t size);
+void		*malloc(size_t size);
 void		*new_page(size_t size);
 void		free(void *ptr);
 size_t		get_page_size(size_t size);
