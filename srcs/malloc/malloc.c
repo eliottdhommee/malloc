@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/11 09:00:47 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/12 09:38:26 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,18 @@ t_page		*search_free_space(t_page **root, size_t size)
 	else if (tmp)
 	{
 	printf("variable f is at address: %p\n", (void*)tmp_prev);
+		tmp->next = new_node(new_page(size), get_page_size(size), TRUE);
+		tmp_next = tmp->next;
+		tmp->next = new_node(((char*)tmp + size), tmp->size - size, FALSE);
+		(tmp->next)->prev = tmp;
+		(tmp->next)->next = tmp_next;
+		tmp->size = size;
+		tmp = tmp->next;
+		tmp->free = FALSE;
+	}
+	else
+	{
+		tmp = tmp_prev;
 		tmp->next = new_node(new_page(size), get_page_size(size), TRUE);
 		tmp_next = tmp->next;
 		tmp->next = new_node(((char*)tmp + size), tmp->size - size, FALSE);

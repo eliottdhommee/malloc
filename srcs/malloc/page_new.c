@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 17:08:14 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/11 09:01:52 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/12 08:48:33 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_page		*new_node(void *ptr, size_t size, enum e_bool isfirst)
 	new_page->prev = NULL;
 	new_page->free = TRUE;
 	new_page->size = size;
+	new_page->first = isfirst;
 	return (new_page);
 }
 
