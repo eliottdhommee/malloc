@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/12 11:56:14 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/12 12:12:39 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct		s_page
 	enum e_bool		free;
 	enum e_bool		first;
 	size_t			size;
+
 }					t_page;
 
 void		*malloc(size_t size);
