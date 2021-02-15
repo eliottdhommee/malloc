@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:47:23 by edhommee          #+#    #+#             */
-/*   Updated: 2019/03/04 14:48:50 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/15 10:43:15 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 void		free(void *ptr)
 {
-	ptr = NULL;
+	t_page *tmp;
+
+	tmp = (t_page*)((char*)ptr - sizeof(t_page));
+	tmp->free = TRUE;
 }

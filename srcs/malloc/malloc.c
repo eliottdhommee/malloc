@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/12 12:34:05 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/15 12:20:11 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ void		set_new_node(t_page *ptr, size_t size)
 	t_page		*tmp;
 
 	tmp = ptr->next;
-	ptr->next = new_node(((char*)ptr + size), ptr->size - size - sizeof(t_page*), FALSE);
+	ptr->next = new_node((char*)ptr + size , ptr->size - size - sizeof(t_page), FALSE);
 	(ptr->next)->prev = ptr;
 	(ptr->next)->next = tmp;
 	ptr->size = size;
 }
 
-t_page		*search_free_space(t_page **root, size_t size)
+t_page		*search_free_space(t_page *root, size_t size)
 {
 	t_page		*tmp;
 	t_page		*tmp_prev;
 
-	tmp = *root;
+	tmp = root;
 	while (tmp && tmp->free == FALSE && tmp->size <= size)
 	{
 		tmp_prev = tmp;
@@ -64,7 +64,7 @@ t_page		*search_free_space(t_page **root, size_t size)
 	}
 	else if (tmp)
 	{
-		tmp->next = new_node(new_page(size), get_page_size(size) - sizeof(t_page*), TRUE);
+		tmp->next = new_node(new_page(size), get_page_size(size) - sizeof(t_page), TRUE);
 		set_new_node(tmp, size);
 		tmp = tmp->next;
 		tmp->free = FALSE;
@@ -72,7 +72,7 @@ t_page		*search_free_space(t_page **root, size_t size)
 	else
 	{
 		tmp = tmp_prev;
-		tmp->next = new_node(new_page(size), get_page_size(size) - sizeof(t_page*), TRUE);
+		tmp->next = new_node(new_page(size), get_page_size(size) - sizeof(t_page), TRUE);
 		set_new_node(tmp, size);
 		tmp = tmp->next;
 		tmp->free = FALSE;
@@ -82,11 +82,13 @@ t_page		*search_free_space(t_page **root, size_t size)
 
 void		*malloc(size_t size)
 {
-	t_page				**root;
+	t_page				*root;
 	t_page				*free_space;
 
+	printf("test\n");
 	if (size == 0)
 		return (NULL);
+	size = size + sizeof(t_page);
 	size = align_size(size);
 	root = stock_roots(size);
 	free_space = search_free_space(root, size);
