@@ -20,16 +20,12 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 SRC_DIR		= ./srcs/
 
-MALLOC_DIR	= malloc/
-MALLOC_SRC	= malloc.c realloc.c free.c page_new.c
+SRCS		= malloc.c realloc.c free.c page_new.c block_search.c
 
-MALLOC		= $(addprefix $(MALLOC_DIR),$(MALLOC_SRC))
-FILES		= $(MALLOC)
-
-SRC			= $(addprefix $(SRC_DIR),$(FILES))
+SRC			= $(addprefix $(SRC_DIR),$(SRCS))
 
 OBJ_DIR		= ./obj/
-OBJ			= $(addprefix $(OBJ_DIR),$(FILES:.c=.o))
+OBJ			= $(addprefix $(OBJ_DIR),$(SRCS:.c=.o))
 
 INC			= ./includes/
 INCLUDES	= -I $(INC)
@@ -40,7 +36,7 @@ all: $(NAME)
 
 $(NAME): obj $(OBJ)
 	$(CC) $(CFLAGS) -shared $(OBJ) -o $(NAME)
-	@ln -sf $(NAME) libft_malloc.so
+	ln -sf $(NAME) libft_malloc.so
 
 obj:
 	mkdir -p $(OBJ_DIR)

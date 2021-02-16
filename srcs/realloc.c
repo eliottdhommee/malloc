@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfindi.c                                      :+:      :+:    :+:   */
+/*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/13 17:54:55 by edhommee          #+#    #+#             */
-/*   Updated: 2018/03/03 20:30:26 by edhommee         ###   ########.fr       */
+/*   Created: 2019/03/04 14:46:47 by edhommee          #+#    #+#             */
+/*   Updated: 2021/02/16 08:10:31 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <liblst.h>
+#include <libft_malloc.h>
 
-int		ft_lstfindi(t_list *begin, void *dataref, int (*cmp)(void*, void*))
+char	*ft_strcpy(char *dest, const char *src)
 {
-	t_list		*list;
-	int			i;
+	char		*tmp;
 
-	i = 0;
-	list = begin;
-	while (list && cmp(dataref, list->data) != 0)
-	{
-		list = list->next;
-		i++;
-	}
-	return (i);
+	tmp = dest;
+	if (dest == src)
+		return (dest);
+	while (*src)
+		*dest++ = *src++;
+	*dest = '\0';
+	return (tmp);
+}
+
+void		*realloc(void *ptr, size_t size)
+{
+	char *tmp;
+
+	tmp = malloc(size);
+	tmp = ft_strcpy(tmp, ptr);
+	free(ptr);
+	return(tmp);
 }

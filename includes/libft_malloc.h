@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/12 12:12:39 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/16 11:54:51 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef	struct		s_page
 
 void		*malloc(size_t size);
 void		*new_page(size_t size);
+t_page		*fit_block(t_page *root, size_t size);
 void		free(void *ptr);
 size_t		get_page_size(size_t size);
 t_page		*new_node(void *ptr, size_t size, enum e_bool isfirst);

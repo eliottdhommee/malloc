@@ -10,7 +10,6 @@ int main()
 	while(i < 1024)
 	{
 		addr = (char*)malloc(1024);
-		printf("test\n");
 		addr[0] = 42;
 		i++;
 	}

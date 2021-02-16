@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 17:08:14 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/12 12:40:44 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/16 11:43:56 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ size_t			get_page_size(size_t size)
 	size_t page_size;
 
 	if (size <= TINY_MALLOC)
-		page_size = (((TINY_MALLOC + sizeof(t_page)) * 100) / getpagesize()) * (getpagesize() + 1);
+		page_size = (((TINY_MALLOC * 100) / getpagesize()) + 1) * getpagesize();
 	else if (size <= SMALL_MALLOC)
-		page_size = (((SMALL_MALLOC + sizeof(t_page)) * 100) / getpagesize()) * (getpagesize() + 1);
+		page_size = (((SMALL_MALLOC * 100) / getpagesize()) + 1) * getpagesize();
 	else
-		page_size = ((size + sizeof(t_page))  / getpagesize()) * (getpagesize() + 1);
+		page_size = ((size  / getpagesize()) + 1) * getpagesize();
 	return (page_size);
 }
 
@@ -49,19 +49,19 @@ void			*stock_roots(size_t size)
 	if (size <= TINY_MALLOC)
 	{
 		if (!root_tiny)
-			root_tiny = new_node(new_page(size), get_page_size(size), TRUE);
+			root_tiny = new_page(size);
 		return (&root_tiny);
 	}
 	if (size <= SMALL_MALLOC)
 	{
 		if (!root_small)
-			root_small = new_node(new_page(size), get_page_size(size), TRUE);
+			root_small = new_page(size);
 		return (&root_small);
 	}
 	else
 	{
 		if (!root_large)
-			root_large = new_node(new_page(size), size, TRUE);
+			root_large = new_page(size);
 		return (&root_large);
 	}
 }
