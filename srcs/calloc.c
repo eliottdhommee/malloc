@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 14:47:23 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/17 08:29:58 by edhommee         ###   ########.fr       */
+/*   Created: 2021/02/17 09:24:25 by edhommee          #+#    #+#             */
+/*   Updated: 2021/02/17 10:12:27 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_malloc.h>
 
-void		free(void *ptr)
+void		*calloc(size_t nmemb, size_t size)
 {
-	t_page *tmp;
+	void	*tmp;
 
-	if (!ptr)
-		return ;
-	tmp = (t_page*)((char*)ptr - sizeof(t_page));
-	tmp->free = TRUE;
+	tmp = malloc(nmemb * size);
+	ft_bzero(tmp, nmemb * size);
+	return(tmp);
 }

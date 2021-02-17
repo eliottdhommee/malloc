@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/16 11:54:51 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/17 10:08:43 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/mman.h>
+# include <libft.h>
 
 # define TINY_MALLOC 512
 # define SMALL_MALLOC 2048
@@ -46,5 +47,6 @@ t_page		*new_node(void *ptr, size_t size, enum e_bool isfirst);
 void		*stock_roots(size_t size);
 void		*realloc(void *ptr, size_t size);
 void		show_alloc_mem();
+void *calloc(size_t nmemb, size_t size);
 
 #endif

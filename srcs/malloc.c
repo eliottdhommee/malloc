@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/16 12:15:57 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/17 09:29:08 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void		*malloc(size_t size)
 
 	if (size == 0)
 		return (NULL);
-	printf("test\n");
 	size = align_size(size);
 	root = stock_roots(size);
 	free_space = fit_block(root, size);

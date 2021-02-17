@@ -20,40 +20,42 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 SRC_DIR		= ./srcs/
 
-SRCS		= malloc.c realloc.c free.c page_new.c block_search.c
+SRCS		= malloc.c realloc.c free.c page_new.c block_search.c calloc.c
 
 SRC			= $(addprefix $(SRC_DIR),$(SRCS))
 
 OBJ_DIR		= ./obj/
 OBJ			= $(addprefix $(OBJ_DIR),$(SRCS:.c=.o))
 
-INC			= ./includes/
-INCLUDES	= -I $(INC)
+INCLUDES	= -I ./includes/ -I ./libft/includes/
+
+LIB_DIR		= ./libft/
+LIBFT		= $(LIB_DIR)libft.a
+LIB_LINK	= -Llibft -lft
 
 .PHONY: clean fclean re all
 
 all: $(NAME)
 
-$(NAME): obj $(OBJ)
-	$(CC) $(CFLAGS) -shared $(OBJ) -o $(NAME)
-	ln -sf $(NAME) libft_malloc.so
+$(NAME): $(OBJ_DIR) $(LIBFT) $(OBJ)
+	@$(CC) $(CFLAGS) $(LIB_LINK) -shared $(OBJ) -o $(NAME)
+	@ln -sf $(NAME) libft_malloc.so
+	@printf "\033[0;32m%-50s\033[0m\n" "Compilation done"
 
-obj:
-	mkdir -p $(OBJ_DIR)
-	mkdir -p $(OBJ_DIR)$(LST_DIR)
-	mkdir -p $(OBJ_DIR)$(BTREE_DIR)
-	mkdir -p $(OBJ_DIR)$(RBTREE_DIR)
-	mkdir -p $(OBJ_DIR)$(PF_DIR)
-	mkdir -p $(OBJ_DIR)$(CLASSIC_DIR)
-	mkdir -p $(OBJ_DIR)$(MALLOC_DIR)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(LIBFT):
+	@make -C $(LIB_DIR)
 
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
+	@make clean -C $(LIB_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
