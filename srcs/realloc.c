@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:47 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/22 11:27:21 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/24 11:50:45 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 void		*realloc(void *ptr, size_t size)
 {
 	char *tmp;
-ft_printf("%w%lu\n", 2, sizeof(t_page));
 
+	write(2, "4", 1);
 	tmp = malloc(size);
 	tmp = ft_strcpy(tmp, ptr);
 	free(ptr);
-	return(tmp);
+	write(2, "5", 1);
+	return (tmp);
 }
