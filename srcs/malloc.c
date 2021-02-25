@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/24 12:21:27 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/25 11:22:53 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ void		*malloc(size_t size)
 	t_page				*root;
 	t_page				*free_space;
 
-	dprintf(2, "%lu\n", size);
+	ft_putstr_fd("malloc : ", 2);
 	if (size == 0)
 		return (NULL);
 	size = align_size(size);
 	root = stock_roots(size);
 	free_space = fit_block(root, size);
+	print_address_hex((char*)free_space + sizeof(t_page));
 	return ((char*)free_space + sizeof(t_page));
 }

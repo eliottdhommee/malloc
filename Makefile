@@ -20,7 +20,7 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 SRC_DIR		= ./srcs/
 
-SRCS		= malloc.c realloc.c free.c page_new.c block_search.c calloc.c
+SRCS		= malloc.c realloc.c free.c page_new.c block_search.c calloc.c show_alloc_mem.c
 
 SRC			= $(addprefix $(SRC_DIR),$(SRCS))
 

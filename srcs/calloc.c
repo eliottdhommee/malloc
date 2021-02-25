@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:24:25 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/24 11:50:50 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/02/25 11:22:24 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ void		*calloc(size_t nmemb, size_t size)
 {
 	void	*tmp;
 
-	write(2, "6", 1);
+	ft_putstr_fd("calloc : ", 2);
+	if (nmemb == 0 || size == 0)
+		return (NULL);
 	tmp = malloc(nmemb * size);
 	ft_bzero(tmp, nmemb * size);
-	write(2, "7", 1);
+	print_address_hex(tmp);
 	return (tmp);
 }
