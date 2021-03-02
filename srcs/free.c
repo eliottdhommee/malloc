@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:47:23 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/25 11:22:12 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/02 11:53:41 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void		*search_malloc(void *ptr)
 	void	*tmp;
 	void	*res;
 
+	if (ptr == NULL)
+		return(NULL);
 	tmp = stock_roots(1);
 	if ((res = search_ptr(tmp, ptr)))
 		return (res);
@@ -43,7 +45,7 @@ void		*search_malloc(void *ptr)
 	return (NULL);
 }
 
-void		free(void *ptr)
+void		ft_free(void *ptr)
 {
 	t_page *tmp;
 
@@ -51,9 +53,9 @@ void		free(void *ptr)
 	print_address_hex(ptr);
 	if (!ptr)
 		return ;
-	if (!(tmp = search_malloc(ptr)))
+	tmp = search_malloc(ptr);
+	if (!tmp)
 		return ;
-	tmp = (t_page*)((char*)ptr - sizeof(t_page));
 	tmp->free = TRUE;
 	print_address_hex(ptr);
 }
