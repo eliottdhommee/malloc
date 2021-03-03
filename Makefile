@@ -11,19 +11,23 @@
 # **************************************************************************** #
 
 ifeq ($(HOSTTYPE),)
-		HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
 NAME		= libft_malloc_$(HOSTTYPE).so
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 SRC_DIR		= ./srcs/
 
 SRCS		= malloc.c realloc.c free.c page_new.c block_search.c calloc.c show_alloc_mem.c
 
 SRC			= $(addprefix $(SRC_DIR),$(SRCS))
 
+T			= tests/
+TESTS		= $Ttest_malloc.c
+TEST_LIB	= -L/Users/edhommee/.brew/Cellar/criterion/2.3.3/lib -lcriterion
+TEST_INC	= -I/Users/edhommee/.brew/Cellar/criterion/2.3.3/include
 OBJ_DIR		= ./obj/
 OBJ			= $(addprefix $(OBJ_DIR),$(SRCS:.c=.o))
 
@@ -51,6 +55,9 @@ $(LIBFT):
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
+test:$(NAME)
+	gcc $(TESTS) $(NAME) $(INCLUDES) $(TEST_LIB) $(TEST_INC) -o test_malloc
+	./test_malloc
 clean:
 	@rm -rf $(OBJ_DIR)
 	@make clean -C $(LIB_DIR)

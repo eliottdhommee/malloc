@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:47:23 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/02 11:53:41 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/03 10:43:16 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void		ft_free(void *ptr)
 {
 	t_page *tmp;
 
-	ft_putstr_fd("free : ", 2);
-	print_address_hex(ptr);
+	//ft_putstr_fd("free : ", 2);
+	//print_address_hex(ptr);
 	if (!ptr)
 		return ;
 	tmp = search_malloc(ptr);
 	if (!tmp)
 		return ;
 	tmp->free = TRUE;
-	print_address_hex(ptr);
+	//print_address_hex(ptr);
 }
