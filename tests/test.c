@@ -10,10 +10,10 @@ int main()
 	i = 0;
 	while(i < 20000)
 	{
-		addr = (char*)ft_malloc(5000);
+		addr = (char*)malloc(5000);
 		addr = memset(addr, 0, 5000);
 		dprintf(2, "%p\n",addr);
-		ft_realloc(addr, 6000);
+		realloc(addr, 6000);
 		addr[0] = 42;
 		i++;
 	}
