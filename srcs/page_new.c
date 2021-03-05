@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 17:08:14 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/24 10:47:50 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/05 10:00:34 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			*new_page(size_t size)
 	page_size = get_page_size(size);
 	tmp = mmap(NULL, page_size, PROT_READ | PROT_WRITE,
 			MAP_PRIVATE | MAP_ANON, -1, 0);
-	return (new_node(tmp, page_size, TRUE));
+	return (new_node(tmp, page_size , TRUE));
 }
 
 t_page			*new_node(void *ptr, size_t size, enum e_bool isfirst)

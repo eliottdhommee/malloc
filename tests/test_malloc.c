@@ -33,13 +33,14 @@ Test(Malloc, tiny_lot) {
 	char *tiny;
 	int size;
 
-	i = 0;
-	size = 200;
-	while(i < 2000)
+	i = 1;
+	size = 4035;
+	while(i < 20000)
 	{
-		ft_free(tiny);
-		tiny= (char*)ft_malloc(size);
-		tiny = memset(tiny, 0, size);
+		//printf("%d\n",i);
+		tiny= (char*)ft_malloc(i);
+		cr_assert_not_null(tiny);
+		tiny = memset(tiny, 0, i);
 		i++;
 	}
 	cr_assert_not_null(tiny);

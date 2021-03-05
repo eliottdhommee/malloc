@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/04 08:33:32 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/05 12:01:01 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			align_size(int size)
 	return (size);
 }
 
-void		*ft_malloc(size_t size)
+void		*malloc(size_t size)
 {
 	t_page				*root;
 	t_page				*free_space;

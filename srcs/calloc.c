@@ -6,20 +6,20 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:24:25 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/04 08:33:55 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/05 12:01:23 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_malloc.h>
 
-void		*ft_calloc(size_t nmemb, size_t size)
+void		*calloc(size_t nmemb, size_t size)
 {
 	void	*tmp;
 
 	//ft_putstr_fd("calloc : ", 2);
 	if (nmemb == 0 || size == 0)
 		return (NULL);
-	tmp = ft_malloc(nmemb * size);
+	tmp = malloc(nmemb * size);
 	ft_bzero(tmp, nmemb * size);
 	//print_address_hex(tmp);
 	return (tmp);

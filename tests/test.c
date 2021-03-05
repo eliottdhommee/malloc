@@ -1,6 +1,6 @@
-#include "./includes/libft_malloc.h"
+#include "../includes/libft_malloc.h"
 #include <stdio.h>
-#include "libft/includes/libft.h"
+#include "../libft/includes/libft.h"
 
 int main()
 {

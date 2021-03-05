@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 11:24:58 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/24 10:45:18 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/05 10:00:15 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_page		*fit_block(t_page *root, size_t size)
 	tmp = block_search(root, size);
 	if (tmp && tmp->free == TRUE && tmp->size >= size)
 	{
-		if (tmp->size - size > 2 * sizeof(t_page))
+		if (tmp->size - size >= 4 * sizeof(t_page) && size <= SMALL_MALLOC)
 		{
 			tmp_next = tmp->next;
 			tmp->next = new_node((char*)tmp + size, tmp->size - size, FALSE);
@@ -50,9 +50,12 @@ t_page		*fit_block(t_page *root, size_t size)
 	{
 		tmp->next = new_page(size);
 		tmp = tmp->next;
-		tmp->next = new_node((char*)tmp + size, tmp->size - size, FALSE);
+		if (size <= SMALL_MALLOC)
+		{
+			tmp->next = new_node((char*)tmp + size, tmp->size - size, FALSE);
+			tmp->size = size;
+		}
 		tmp->free = FALSE;
-		tmp->size = size;
 	}
 	return (tmp);
 }

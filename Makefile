@@ -58,6 +58,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(TEST_NAME)
 
 include tests/tests.mk
 re: fclean all

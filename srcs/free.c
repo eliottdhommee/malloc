@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:47:23 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/04 08:34:20 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/05 12:01:30 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		*search_malloc(void *ptr)
 	return (NULL);
 }
 
-void		ft_free(void *ptr)
+void		free(void *ptr)
 {
 	t_page *tmp;
 
