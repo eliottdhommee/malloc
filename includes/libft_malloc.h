@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:45:39 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/04 08:35:08 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/05 11:08:44 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "../libft/includes/libft.h"
 
 # define TINY_MALLOC 512
-# define SMALL_MALLOC 2048
+# define SMALL_MALLOC 4048
 
 enum				e_bool
 {

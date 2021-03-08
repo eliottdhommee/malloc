@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/05 12:01:01 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/08 12:02:22 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			get_size_type(size_t size)
 		return (3);
 }
 
-int			align_size(int size)
+size_t	align_size(size_t  size)
 {
 	size = (size + 15) & ~15;
 	size = size + sizeof(t_page);

@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 10:58:52 by edhommee          #+#    #+#             */
-/*   Updated: 2021/02/25 08:13:58 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/03/08 09:15:05 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void		print_address_hex(void* p0) {
 	write_char('\n');
 }
 
-/*void		show_alloc_mem()
+void		show_alloc_mem()
 {
-}*/
+}

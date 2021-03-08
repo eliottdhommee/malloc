@@ -35,7 +35,7 @@ Test(Malloc, tiny_lot) {
 
 	i = 1;
 	size = 4035;
-	while(i < 20000)
+	while(i < 1)
 	{
 		//printf("%d\n",i);
 		tiny= (char*)ft_malloc(i);
@@ -50,17 +50,20 @@ Test(Malloc, small_lot) {
 	int i;
 	char *small;
 	int size;
+	t_page *tmp;
 
-	i = 0;
+	i = 1;
 	size  = 1000;
 	while(i < 2000)
 	{
-		ft_free(small);
-		small= (char*)ft_malloc(size);
-		small= memset(small, 0, size);
+		small= (char*)ft_malloc(i);
+		small= memset(small, 0, i);
+		small= memset(small, 0, i);
+		tmp = (t_page*)((char*)small - sizeof(t_page));
+		cr_expect_geq(tmp->size, (size_t)(i + sizeof(t_page)), "%zu > %d\n", tmp->size, i);
 		i++;
 	}
-	cr_assert_not_null(small);
+	cr_assert_not_null(small, "not null");
 }
 
 Test(Malloc, large_lot) {
@@ -70,7 +73,7 @@ Test(Malloc, large_lot) {
 
 	size = 10000;
 	i = 0;
-	while(i < 2000)
+	while(i < 1)
 	{
 		ft_free(large);
 		large = (char*)ft_malloc(size);
