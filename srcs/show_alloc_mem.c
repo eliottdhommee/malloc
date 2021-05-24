@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 10:58:52 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/08 09:15:05 by edhommee         ###   ########.fr       */
+/*   Updated: 2021/05/24 11:55:42 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,35 @@ void		print_address_hex(void* p0) {
 	write_char('\n');
 }
 
+void 		show_type(t_page *page)
+{
+	t_page	*tmp;
+
+	tmp = page;
+	while(tmp)
+	{
+		print_address_hex((char*)tmp + sizeof(t_page));
+		ft_putstr(" - ");
+		print_address_hex((char*)tmp + sizeof(t_page) + tmp->size);
+		ft_putnbr(tmp->size);
+		tmp = tmp->next;
+	}
+}
+
 void		show_alloc_mem()
 {
+	t_page	*tmp;
+
+	tmp = stock_roots(0);
+	ft_putstr("TINY: ");
+	print_address_hex(tmp);
+	show_type(tmp);
+	tmp = stock_roots(SMALL_MALLOC);
+	ft_putstr("SMALL: ");
+	print_address_hex(tmp);
+	show_type(tmp);
+	tmp = stock_roots(SMALL_MALLOC + 1);
+	ft_putstr("LARGE: ");
+	print_address_hex(tmp);
+	show_type(tmp);
 }
