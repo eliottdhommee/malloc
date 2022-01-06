@@ -6,7 +6,7 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:47:23 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/08 12:02:06 by edhommee         ###   ########.fr       */
+/*   Updated: 2022/01/06 17:02:42 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,27 @@ void		free(void *ptr)
 {
 	t_page *tmp;
 
-	//ft_putstr_fd("free : ", 2);
-	//print_address_hex(ptr);
 	if (!ptr)
 		return ;
 	tmp = search_malloc(ptr);
 	if (!tmp)
 		return ;
+	if (tmp->size > SMALL_MALLOC && tmp != stock_roots(SMALL_MALLOC +1) && tmp->free ==FALSE)
+	{
+		if(tmp->prev)
+			(tmp->prev)->next = tmp->next;
+		if(tmp->next)
+			(tmp->next)->prev = tmp->prev;
+		munmap(tmp, tmp->size);
+		return;
+	}
+	if (tmp->next && tmp->size <= SMALL_MALLOC)
+	{
+		if (tmp->next->first == FALSE && tmp->next->free == TRUE)
+		{
+			tmp->size = tmp->size + (tmp->next)->size;
+			tmp->next = (tmp->next)->next;
+		}
+	}
 	tmp->free = TRUE;
-	//print_address_hex(ptr);
 }

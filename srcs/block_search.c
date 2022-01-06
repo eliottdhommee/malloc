@@ -6,13 +6,13 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 11:24:58 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/05 10:00:15 by edhommee         ###   ########.fr       */
+/*   Updated: 2022/01/06 17:14:26 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_malloc.h>
 
-t_page		*block_search(t_page *root, size_t size)
+t_page	*block_search(t_page *root, size_t size)
 {
 	t_page		*tmp;
 	t_page		*tmp_prev;
@@ -29,7 +29,7 @@ t_page		*block_search(t_page *root, size_t size)
 		return (tmp_prev);
 }
 
-t_page		*fit_block(t_page *root, size_t size)
+t_page	*fit_block(t_page *root, size_t size)
 {
 	t_page		*tmp;
 	t_page		*tmp_next;
@@ -49,6 +49,7 @@ t_page		*fit_block(t_page *root, size_t size)
 	else
 	{
 		tmp->next = new_page(size);
+		(tmp->next)->prev = tmp;
 		tmp = tmp->next;
 		if (size <= SMALL_MALLOC)
 		{

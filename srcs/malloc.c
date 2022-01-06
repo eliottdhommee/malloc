@@ -6,10 +6,11 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:17 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/08 12:02:22 by edhommee         ###   ########.fr       */
+/*   Updated: 2022/01/06 12:58:51 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <pthread.h>
 #include <libft_malloc.h>
 
 int			get_size_type(size_t size)
@@ -34,12 +35,10 @@ void		*malloc(size_t size)
 	t_page				*root;
 	t_page				*free_space;
 
-	//ft_putstr_fd("malloc : ", 2);
 	if(size == 0)
 		return (NULL);
 	size = align_size(size);
 	root = stock_roots(size);
 	free_space = fit_block(root, size);
-	//print_address_hex((char*)free_space + sizeof(t_page));
 	return ((char*)free_space + sizeof(t_page));
 }

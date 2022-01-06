@@ -6,30 +6,40 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:46:47 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/08 12:05:23 by edhommee         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:24:58 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_malloc.h>
 
-void		*realloc(void *ptr, size_t size)
+static void	*ft_memcpy2(void *dst, const void *src, size_t n)
 {
-	char *tmp;
-	t_page *check;
+	size_t		i;
 
-	//ft_putstr_fd("realloc : ", 2);
-	//print_address_hex(ptr);
+	i = -1;
+	while (++i < n)
+		*((char *)dst + i) = *((char *)src + i);
+	return (dst);
+}
+
+void	*realloc(void *ptr, size_t size)
+{
+	char	*tmp;
+	t_page	*check;
+
+	if (size == 0 && ptr)
+		free(ptr);
 	if (size <= 0)
 		return (NULL);
 	check = search_malloc(ptr);
 	if (ptr && (check == NULL))
-		return(ptr);
+		return (NULL);
 	tmp = malloc(size);
 	if (check != NULL)
 	{
-		ft_memcpy(tmp, ptr, check->size - sizeof(t_page));
+		if (check->size <= size)
+			ft_memcpy2(tmp, ptr, check->size);
 		free(ptr);
 	}
-	//print_address_hex(tmp);
 	return (tmp);
 }

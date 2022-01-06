@@ -14,11 +14,10 @@ ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
-
 NAME		= libft_malloc_$(HOSTTYPE).so
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror
 SRC_DIR		= ./srcs/
 
 SRCS		= malloc.c realloc.c free.c page_new.c block_search.c calloc.c show_alloc_mem.c
@@ -38,7 +37,7 @@ LIB_LINK	= -Llibft -lft
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(LIBFT) $(OBJ)
+$(NAME):$(OBJ_DIR) $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) $(LIB_LINK) -shared $(OBJ) -o $(NAME)
 	@ln -sf $(NAME) libft_malloc.so
 	@printf "\033[0;32m%-50s\033[0m\n" "Compilation done"
@@ -58,6 +57,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f libft_malloc.so
 	@rm -f $(TEST_NAME)
 
 include tests/tests.mk

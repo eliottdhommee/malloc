@@ -6,21 +6,36 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 09:24:25 by edhommee          #+#    #+#             */
-/*   Updated: 2021/03/08 12:01:51 by edhommee         ###   ########.fr       */
+/*   Updated: 2022/01/06 13:25:26 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_malloc.h>
 
-void		*calloc(size_t nmemb, size_t size)
+void	*ft_memset2(void *s, int c, size_t n)
+{
+	unsigned char	*dest;
+
+	if (!n)
+		return (s);
+	dest = (unsigned char *)s;
+	while (n--)
+		*dest++ = (unsigned char)c;
+	return (s);
+}
+
+void	ft_bzero2(void *s, size_t n)
+{
+	ft_memset2(s, 0, n);
+}
+
+void	*calloc(size_t nmemb, size_t size)
 {
 	void	*tmp;
 
-	//ft_putstr_fd("calloc : ", 2);
 	if (nmemb == 0 || size == 0)
 		return (NULL);
 	tmp = malloc(nmemb * size);
-	ft_bzero(tmp, nmemb * size);
-	//print_address_hex(tmp);
+	ft_bzero2(tmp, nmemb * size);
 	return (tmp);
 }
