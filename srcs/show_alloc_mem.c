@@ -6,69 +6,18 @@
 /*   By: edhommee <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 10:58:52 by edhommee          #+#    #+#             */
-/*   Updated: 2022/01/06 16:52:32 by edhommee         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:17:38 by edhommee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft_malloc.h>
-#include <libft.h>
 #include <stdint.h>
-
-void		write_char(char c)
-{
-	write(1, &c, 1);
-}
 
 char		hex_digit(int v) {
 	if (v >= 0 && v < 10)
 		return '0' + v;
 	else
 		return 'a' + v - 10;
-}
-
-size_t	ft_strlen(const char *str)
-{
-	char	*tmp;
-
-	tmp = (char*)str;
-	while (*str)
-		str++;
-	return (str - tmp);
-}
-
-void	ft_putnbr(int nb)
-{
-	if (nb == -2147483648)
-	{
-		write_char('-');
-		write_char('2');
-		nb = 147483648;
-	}
-	if (nb < 0)
-	{
-		write_char('-');
-		nb = -nb;
-	}
-	if (nb <= 9)
-	{
-		write_char(nb + '0');
-	}
-	else
-	{
-		ft_putnbr(nb / 10);
-		write_char('0' + (nb % 10));
-	}
-}
-
-void		ft_putstr_fd(char const *s, int fd)
-{
-	if (s)
-		write(fd, s, ft_strlen(s));
-}
-
-void	ft_putstr(const char *s)
-{
-	ft_putstr_fd(s, 1);
 }
 
 void		print_address_hex(void* p0) {
